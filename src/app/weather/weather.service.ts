@@ -1,6 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
+interface ICurrentWetherData {
+  weather: [{
+    description: string,
+    icon: string
+  }],
+  main: {
+    temp: number
+  },
+  sys: {
+    country: string
+  },
+  dt: number,
+  name: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
