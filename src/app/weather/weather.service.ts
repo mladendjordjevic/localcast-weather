@@ -6,6 +6,7 @@ import { ICurrentWeather } from '../interfaces';
 import { map } from 'rxjs/Operators';
 
 
+
  interface ICurrentWetherData {
   weather: [{
     description: string,
@@ -24,32 +25,38 @@ import { map } from 'rxjs/Operators';
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherService {
+export class WeatherService implements IWeatherSevice {
 
   constructor(private httpClient: HttpClient) { }
 
   getCurrentWeather (city: string, country: string):Observable<ICurrentWeather> {
     return this.httpClient.get<ICurrentWetherData>(
-      `${environment.baseUrl}api.openweathermap.org/data/2,5/weather?` +
-      `q=${city},${country}&appid=${environment.appId}`
+      `http://api.openweathermap.org/data/2.5/weather?,q=${city},${country}&appid=${environment.appId}`
     ).pipe(
       map(data =>
         this.transformToICurentWeather(data)
         )
     )
-  private transformToICurentWeather ( data:ICurrentWetherData ) : ICurrentWeather {
-     return {
-       city: data.name,
-       country: data.sys.country,
-       date: data.dt *1000,
-       image:
-       `http://openweathermap.org/img/w/${data.weather [0].icon}.ping`,
-       temperature: this.convertKelvinToFahrenheit (data.main.temp),
-       description: data.weather[0].description
+  
      }
+     private  transformToICurentWeather( data:ICurrentWetherData ) : ICurrentWeather {
+      return {
+        city: data.name,
+        country: data.sys.country,
+        date: data.dt *1000,
+        Image:
+        `http://openweathermap.org/img/w/${data.weather [0].icon}.ping`,
+        temperature: this.convertKelvinToFahrenheit (data.main.temp),
+        description: data.weather[0].description
+   }
+  
    }
    private convertKelvinToFahrenheit (kelvin: number) :number {
-     return kelvin * 9 / 5 -459.67
-   }
+    return kelvin * 9 / 5 -459.67
   }
+}
+
+export interface IWeatherSevice {
+  getCurrentWeather(city:string, country: string) :
+  Observable<ICurrentWeather>
 }

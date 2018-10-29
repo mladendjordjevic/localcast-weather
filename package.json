@@ -1,6 +1,7 @@
 {
-  "name": "local-weather-app",
-  "version": "0.0.0",
+  "name": "localcast-weathers",
+  "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "standardize": "prettier",
@@ -9,7 +10,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
-
   },
   "private": true,
   "dependencies": {
@@ -26,10 +26,10 @@
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
-  "prettier" : {
+  "prettier": {
     "printWidth": 90,
     "semi": false,
-    "singleQuote":true,
+    "singleQuote": true,
     "trailingComma": "es5",
     "parser": "typescript"
   },
